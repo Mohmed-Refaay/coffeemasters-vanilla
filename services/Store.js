@@ -3,4 +3,14 @@ const Store = {
   cart: [],
 };
 
-export default Store;
+const proxiedStore = new Proxy(Store, {
+  set(target, prop, value) {
+    target[prop] = value;
+
+    window.dispatchEvent(new Event(`appstore${prop}change`));
+
+    return true;
+  },
+});
+
+export default proxiedStore;

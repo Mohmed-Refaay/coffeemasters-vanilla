@@ -11,7 +11,29 @@ export class MenuPage extends HTMLElement {
     this.loadExternalCSS("components/MenuPage.css");
   }
 
-  connectedCallback() {}
+  connectedCallback() {
+    window.addEventListener("appstoremenuchange", () => {
+      console.log(app.store.menu);
+      this.render();
+    });
+  }
+
+  render() {
+    const container = this.root.querySelector("#menu");
+    if (app.store.menu) {
+      for (let category of app.store.menu) {
+        const elem = document.createElement("li");
+
+        elem.innerHTML = `
+          <h3>${category.name}</h3>
+        `;
+
+        container.appendChild(elem);
+      }
+    } else {
+      container.innerHTML = "Loading...";
+    }
+  }
 }
 
 customElements.define("menu-page", MenuPage);
