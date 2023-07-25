@@ -21,3 +21,7 @@ export async function addToCart(id) {
     app.store.cart = [...app.store.cart, { product, qty: 1 }];
   }
 }
+
+export const removeFromCart = (id) => {
+  app.store.cart = app.store.cart.filter((d) => d.product.id !== id);
+};
