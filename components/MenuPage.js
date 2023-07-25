@@ -16,10 +16,13 @@ export class MenuPage extends HTMLElement {
       console.log(app.store.menu);
       this.render();
     });
+
+    this.render();
   }
 
   render() {
     const container = this.root.querySelector("#menu");
+    container.innerHTML = "";
     if (app.store.menu) {
       for (let category of app.store.menu) {
         const elem = document.createElement("li");
