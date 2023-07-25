@@ -38,7 +38,7 @@ const Router = {
 
           pageElement = document.createElement("details-page");
           pageElement.innerText = "Order" + productId;
-          pageElement.dataset.id = productId;
+          pageElement.dataset.productId = productId;
         }
     }
 

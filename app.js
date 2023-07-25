@@ -6,6 +6,7 @@ import Router from "./services/Router.js";
 import { DetailsPage } from "./components/DetialsPage.js";
 import { MenuPage } from "./components/MenuPage.js";
 import { OrderPage } from "./components/OrderPage.js";
+import ProductItem from "./components/ProductItem.js";
 
 window.app = {};
 app.store = Store;
@@ -15,6 +16,19 @@ window.addEventListener("DOMContentLoaded", async () => {
   loadData();
 
   app.router.init();
+});
+
+window.addEventListener("appstorecartchange", () => {
+  const badge = document.getElementById("badge");
+
+  const cartItemsCount = app.store.cart.reduce(
+    (acc, current) => acc + current.qty,
+    0,
+  );
+
+  badge.innerHTML = cartItemsCount;
+
+  badge.hidden = cartItemsCount === 0;
 });
 
 HTMLElement.prototype.loadExternalCSS = async function (link) {

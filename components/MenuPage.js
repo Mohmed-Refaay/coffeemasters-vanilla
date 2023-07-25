@@ -23,12 +23,19 @@ export class MenuPage extends HTMLElement {
     if (app.store.menu) {
       for (let category of app.store.menu) {
         const elem = document.createElement("li");
-
         elem.innerHTML = `
           <h3>${category.name}</h3>
+          <ul class='category'></ul>
         `;
 
         container.appendChild(elem);
+
+        category.products.forEach((d) => {
+          const productItem = document.createElement("product-item");
+          productItem.dataset.product = JSON.stringify(d);
+
+          elem.querySelector("ul.category").appendChild(productItem);
+        });
       }
     } else {
       container.innerHTML = "Loading...";
